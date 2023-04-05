@@ -1,0 +1,21 @@
+/**My Favorite Books:
+ACOTAR Series (10)
+TOG Series (9)
+Crescent City (9)
+These Hollow Bonds and Vows (8)
+The Nightingale (9)
+Beneath a Scarlet Sky (8)
+The Good Lie (7)
+**/
+
+
+CREATE TABLE Fave_Books (id INTEGER PRIMARY KEY, name TEXT, rating INTEGER);
+
+INSERT INTO Fave_Books VALUES (1, "ACOTAR Series", 10);
+INSERT INTO Fave_Books VALUES (2, "TOG Series", 9);
+INSERT INTO Fave_Books VALUES (3, "Crescent City Series", 10);
+INSERT INTO Fave_Books VALUES (4, "These Hollow Bonds and Vows", 8);
+INSERT INTO Fave_Books VALUES (5, "The Nightingale", 9);
+INSERT INTO Fave_Books VALUES (6, "Beneath a Scarlet Sky", 9);
+INSERT INTO Fave_Books VALUES (7, "The Good Lie", 7);
+SELECT * FROM Fave_Books;

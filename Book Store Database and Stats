@@ -1,4 +1,5 @@
-/*Creating a table that has unique row ids with the name of the book, the type (paperback vs hardcover), he price of the book, the number of pages, the genre, and the type of audience.*/
+/*Creating a table that has unique row ids with the title of the book, the type (paperback vs hardcover), the price of the book, the total number of pages, 
+/*the genre, and the type of audience.*/
 
 CREATE TABLE Book_Store (id INTEGER PRIMARY KEY, Title TEXT, Type TEXT, Price REAL, Total_Pages INTEGER, Genre TEXT, Audience TEXT);
 

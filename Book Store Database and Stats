@@ -1,0 +1,32 @@
+/*Creating a table that has unique row ids with the name of the book, the type (paperback vs hardcover), he price of the book, the number of pages, the genre, and the type of audience.*/
+
+CREATE TABLE Book_Store (id INTEGER PRIMARY KEY, Title TEXT, Type TEXT, Price REAL, Total_Pages INTEGER, Genre TEXT, Audience TEXT);
+
+/*Inserting 16 books and their details that are for sale in my store*/ 
+
+INSERT INTO Book_Store VALUES (1, "ACOTAR Series", "Paperback", 55.80, 2112, "Fantasy Romance", "Adult");
+INSERT INTO Book_Store VALUES (2, "Throne of Glass Series", "Paperback", 58.99, 5008, "Fantasy Romance", "Young Adult");
+INSERT INTO Book_Store VALUES (3, "Crescent City Series", "Hardcover", 74.99, 1579, "Fantasy Romance", "Adult");
+INSERT INTO Book_Store VALUES (4, "These Hollow Vows", "Paperback", 10.49, 496, "Fantasy Romance", "Young Adult");
+INSERT INTO Book_Store VALUES (5, "These Twisted Bonds", "Paperback", 12.49, 358, "Fantasy Romance", "Young Adult");
+INSERT INTO Book_Store VALUES (6, "Beneath a Scarlet Sky", "Hardcover", 22.99, 523, "History", "General");
+INSERT INTO Book_Store VALUES (7, "The Nightingale", "Paperback", 15.99, 608, "History", "General");
+INSERT INTO Book_Store VALUES (8, "The Good Lie", "Paperback", 8.99, 249, "Thriller", "General");
+INSERT INTO Book_Store VALUES (9, "The Hunger Games Trilogy", "Paperback", 50.98, 1408, "Dystopian", "General");
+INSERT INTO Book_Store VALUES (10, "The Ballad of Songbirds and Snakes", "Hardcover", 24.95, 528, "Dystopian", "General");
+INSERT INTO Book_Store VALUES (11, "The Guest List", "Paperback", 9.49, 263, "Thriller", "Young Adult");
+INSERT INTO Book_Store VALUES (12, "The Twilight Series", "Hardcover", 106.49, 2752, "Fantasy Romance", "Young Adult");
+INSERT INTO Book_Store VALUES (13, "Verity", "Paperback", 12.99, 302, "Thriller", "Adult");
+INSERT INTO Book_Store VALUES (14, "The Silent Patient", "Hardcover", 17.49, 349, "Thriller", "General");
+INSERT INTO Book_Store VALUES (15, "Little Fires Everywhere", "Paperback", 10.99, 196, "Suspense", "Young Adult");
+INSERT INTO Book_Store VALUES (16, "Harry Potter Series", "Hardcover", 158.99, 3407, "Fantasy", "General");
+
+/*Order all the books by price, then I want to see the sum of all pages, the book with the minimum amount of pages, and the book with the maximum amount of pages.*/
+/*Lastly, I will retrieve the books and their details by those that cost $50.00 or lessand order them by price (least expensive to most expensive).*/
+
+SELECT * FROM Book_Store ORDER BY Price;
+SELECT SUM(Total_Pages) FROM Book_Store;
+SELECT Title, MAX(Total_Pages) FROM Book_Store;
+SELECT Title, MIN(Total_Pages) FROM Book_Store;
+
+SELECT * FROM Book_Store WHERE Price <= 50.00 ORDER BY Price;

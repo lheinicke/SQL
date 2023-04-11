@@ -62,3 +62,5 @@ SELECT type FROM drs_recs;
 SELECT * FROM workout_log WHERE type IN (SELECT type FROM drs_recs);
 
 SELECT * FROM workout_log WHERE type IN (SELECT type FROM drs_recs WHERE reason LIKE "%muscular%");
+
+SELECT * FROM workout_log WHERE type IN (SELECT type FROM drs_recs WHERE reason LIKE "%muscular%") AND calories > 50 OR HR > 150;

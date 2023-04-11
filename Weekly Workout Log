@@ -1,0 +1,64 @@
+/* My Workout Log for the Past Week */
+CREATE TABLE workout_log
+    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    type TEXT, 
+    minutes INTEGER, 
+    HR INTEGER,
+    calories INTEGER);
+    
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("HIIT", 30, 126, 201);
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("strength", 42, 128, 188);
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("HIIT", 30, 116, 166);
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("tread", 30, 152, 224);
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("tread", 20, 118, 114); 
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("tread", 40, 127, 237);
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("strength", 30, 109, 93);
+INSERT INTO workout_log (type, minutes, HR, calories) VALUES ("tread", 20, 126, 113);
+
+/*Find the average, minimum, and maximum HR values*/
+SELECT HR, AVG(HR), MAX(HR), MIN(HR) FROM workout_log;
+
+/*Filtering Log with Calorie and HR values*/
+SELECT * FROM workout_log WHERE calories > 150 ORDER BY calories; 
+
+SELECT * FROM workout_log WHERE calories > 150 AND HR > 150;
+
+SELECT * FROM workout_log WHERE calories > 125 AND HR > 120 AND minutes < 45;
+
+/* Total Calories Burned For Each Exercise Type*/
+SELECT type, SUM(calories) AS total_calories FROM workout_log
+    GROUP BY type;
+
+/*Average Calories for All Exercises Where >125 calories were burned on average*/
+
+SELECT type, AVG(calories) AS Avg_calories FROM workout_log
+    GROUP BY type
+    HAVING Avg_calories > 125;
+    
+/*Summary of all logs and whether HR was above, below, and within target heart rate zone*/
+
+SELECT type, HR,
+    CASE
+        WHEN HR > 220-34 THEN "above max"
+        WHEN HR > ROUND(0.90 * (220-34)) THEN "above target"
+        WHEN HR > ROUND(0.50 * (220-34)) THEN "within target"
+            ELSE "below target"
+    END as "HR_Zone"
+from workout_log;
+
+/*Creating a new table based on Doctor Recommendations and incorporating it into workout_logs*/
+
+CREATE TABLE drs_recs 
+    (id INTEGER PRIMARY KEY, 
+    type TEXT,
+    reason TEXT);
+    
+INSERT INTO drs_recs (type, reason) VALUES ("tread", "Improves cardiovascular endurance");
+INSERT INTO drs_recs (type, reason) VALUES ("strength", "Improves muscular endurance and burns calories throughout the day");
+
+
+SELECT type FROM drs_recs;
+
+SELECT * FROM workout_log WHERE type IN (SELECT type FROM drs_recs);
+
+SELECT * FROM workout_log WHERE type IN (SELECT type FROM drs_recs WHERE reason LIKE "%muscular%");

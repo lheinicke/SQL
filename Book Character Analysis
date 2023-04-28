@@ -1,0 +1,84 @@
+/* Create tables that include a famous author along with additional information on book series and character names*/
+CREATE TABLE SJM_Books
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+book_name TEXT, series_name TEXT, series_order INTEGER);
+
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Throne of Glass", "Throne of Glass", 1);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Crown of Midnight", "Throne of Glass", 2);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Heir of Fire", "Throne of Glass", 3);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Assassin's Blade", "Throne of Glass", 4);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Queen of Shadows", "Throne of Glass", 5);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Empire of Storms", "Throne of Glass", 6);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Tower of Dawn", "Throne of Glass", 7);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("Kingdom of Ash", "Throne of Glass", 8);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("A Court of Thorns and Roses", "ACOTAR", 1);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("A Court of Mist and Fury", "ACOTAR", 2);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("A Court of War and Ruin", "ACOTAR", 3);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("A Court of Frost and Starlight", "ACOTAR", 4);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("A Court of Silver Flames", "ACOTAR", 5);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("House of Earth and Blood", "Crescent City", 1);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("House of Sky and Breath", "Crescent City", 2);
+INSERT INTO SJM_Books (book_name, series_name, series_order) VALUES ("A House of Flame and Shadow", "Crescent City", 3);
+
+
+CREATE TABLE characters 
+(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, series TEXT);
+INSERT INTO characters (name, series) VALUES ("Aelin", "Throne of Glass");
+INSERT INTO characters (name, series) VALUES ("Dorian", "Throne of Glass");
+INSERT INTO characters (name, series) VALUES ("Chaol", "Throne of Glass");
+INSERT INTO characters (name, series) VALUES ("Rowan", "Throne of Glass");
+INSERT INTO characters (name, series) VALUES ("Manon", "Throne of Glass");
+INSERT INTO characters (name, series) VALUES ("Feyre", "ACOTAR");
+INSERT INTO characters (name, series) VALUES ("Tamlin", "ACOTAR");
+INSERT INTO characters (name, series) VALUES ("Rhysand", "ACOTAR");
+INSERT INTO characters (name, series) VALUES ("Cassian", "ACOTAR");
+INSERT INTO characters (name, series) VALUES ("Nesta", "ACOTAR");
+INSERT INTO characters (name, series) VALUES ("Bryce", "Crescent City");
+INSERT INTO characters (name, series) VALUES ("Hunt", "Crescent City");
+INSERT INTO characters (name, series) VALUES ("Ruhn", "Crescent City");
+INSERT INTO characters (name, series) VALUES ("Lydia", "Crescent City");
+
+CREATE TABLE worlds
+(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, series TEXT);
+INSERT INTO worlds (name, series) VALUES ("Erilea", "Throne of Glass");
+INSERT INTO worlds (name, series) VALUES ("Prynthian", "ACOTAR");
+INSERT INTO worlds (name, series) VALUES ("Midgard", "Crescent City");
+
+CREATE TABLE magic
+(id INTEGER PRIMARY KEY AUTOINCREMENT, character TEXT, magic_power TEXT);
+INSERT INTO magic (character, magic_power) VALUES ("Aelin", "Fire");
+INSERT INTO magic (character, magic_power) VALUES ("Dorian", "Ice");
+INSERT INTO magic (character, magic_power) VALUES ("Rowan", "Wind");
+INSERT INTO magic (character, magic_power) VALUES ("Manon", "Flight");
+INSERT INTO magic (character, magic_power) VALUES ("Feyre", "Everything");
+INSERT INTO magic (character, magic_power) VALUES ("Tamlin", "Strength");
+INSERT INTO magic (character, magic_power) VALUES ("Rhysand", "Mind-Reading");
+INSERT INTO magic (character, magic_power) VALUES ("Hunt", "Storms");
+INSERT INTO magic (character, magic_power) VALUES ("Bryce", "Light");
+
+
+/*Joining table to see which character are in which world*/
+
+SELECT characters.name, worlds.name FROM characters
+JOIN worlds
+ON worlds.series = characters.series;
+
+
+/*Joining tables to see book names with associated characters*/
+
+SELECT characters.name, SJM_Books.book_name FROM characters
+JOIN SJM_books
+ON characters.series = SJM_Books.series_name;
+
+    
+/*Multiple joins*/
+SELECT worlds.name, SJM_Books.book_name FROM worlds
+    JOIN SJM_Books
+    ON worlds.series = SJM_Books.series_name
+    JOIN characters
+    ON characters.series = worlds.series;
+    
+/*Join Character and Magic tables to show characters, magic, and Series they are in*/
+SELECT magic.character, magic.magic_power, series FROM magic
+JOIN characters
+ON magic.character = characters.name;

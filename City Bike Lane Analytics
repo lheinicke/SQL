@@ -134,3 +134,11 @@ rating,
 FROM safety_average_cte
 WHERE rating >=4
 -- THE CODE ABOVE THIS LINE IS A SQL QUERY THAT SELECTS FROM THE CTE --
+
+SELECT street, safetyrating,
+AVG(safetyrating) OVER (PARTITION BY street) as "Average_safety_rating",
+CASE WHEN AVG(safetyrating) OVER (PARTITION BY street) >=4 THEN "Leave As-Is"
+    WHEN AVG(safetyrating) OVER (PARTITION BY street) <2.5 THEN "Remove"
+    ELSE "Improvements Needed"
+    END AS "Recommendation"
+FROM CityBikeLanes
